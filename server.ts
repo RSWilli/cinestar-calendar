@@ -35,8 +35,6 @@ async function getRuntime(title: string) {
     return movieByID.runtime
 }
 
-getRuntime("The Eternals")
-
 let ics: string
 
 const app = express()
