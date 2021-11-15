@@ -54,6 +54,7 @@ async function refetchCalendar() {
         const showtimes = show.showtimes.filter(showtime =>
             showtime.attributes.includes("OV")
             && !showtime.attributes.includes("Alt ConEFF")
+            && !showtime.attributes.includes("Alt ConUFP")
         )
         if (showtimes.length === 0) {
             continue
