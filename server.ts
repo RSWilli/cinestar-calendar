@@ -65,13 +65,21 @@ async function refetchCalendar() {
 
         events.push(...showtimes.map<CalEvent>(showtime => {
 
+            let summary = title
+
+            if (showtime.attributes.includes("2D")) {
+                summary = "(2D) " + summary
+            } else if (showtime.attributes.includes("3D")) {
+                summary = "(3D) " + summary
+            }
+
             const date = dayjs(showtime.datetime, "YYYY-MM-DD HH:mm")
 
             return {
                 date,
                 description: showtime.attributes.join(" "),
                 location: "",
-                title,
+                title: summary,
                 duration: runtime
             }
         }))
