@@ -14,7 +14,6 @@ config()
 
 const movieDB = new MovieDb(process.env.MOVIEDB_API_KEY!)
 
-
 // get movie runtime from movieDB
 async function getRuntime(title: string) {
     // filter "the" from string
@@ -84,7 +83,7 @@ async function refetchCalendar() {
         }))
     }
 
-
+    console.log(`Found ${events.length} events:\n ${events.map(e => `${e.date.format("YYYY-MM-DD HH:mm")} "${e.title}" (${e.duration}min)`).join("\n ")}`)
 
     ics = makeCalendar(events)
 
@@ -96,6 +95,8 @@ refetchCalendar()
 setInterval(refetchCalendar, 1000 * 60 * 30)
 
 app.get("/calendar", (req, res) => {
+    console.log("calendar accessed:", req.headers["user-agent"])
+
     res.contentType("text/calendar")
     res.send(ics)
 })

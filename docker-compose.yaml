@@ -2,5 +2,6 @@ version: "3.7"
 services:
   calendar:
     build: .
+    restart: unless-stopped
     ports: 
       - 3001:3001
